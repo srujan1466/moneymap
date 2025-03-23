@@ -4,19 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <h2>Welcome to Your Dashboard</h2>
-        <form id="incomeForm">
-            <label for="income">Income:</label>
-            <input type="number" id="income" name="income" step="0.01" required>
-            <button type="submit">Calculate Savings</button>
+        <h1>Budget Tracker</h1>
+        <form id="budgetForm">
+            <label for="previous_balance">Previous Balance:</label>
+            <input type="number" id="previous_balance" required>
+
+            <label for="income">Monthly Income:</label>
+            <input type="number" id="income" required>
+
+            <label for="general_expenses">General Expenses:</label>
+            <input type="number" id="general_expenses" required>
+
+            <label for="miscellaneous_expenses">Miscellaneous Expenses:</label>
+            <input type="number" id="miscellaneous_expenses" required>
+
+            <button type="submit">Calculate</button>
         </form>
-        <p>Your Savings: <span id="savings"></span></p>
-        <p><a href="backend/logout.php">Logout</a></p>
-        <p id="error" class="error"></p>
+        <div id="result">
+            <h2>Results</h2>
+            <p>Savings: <span id="savings"></span></p>
+            <p>Balance: <span id="balance"></span></p>
+        </div>
     </div>
     <script src="script.js"></script>
 </body>

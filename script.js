@@ -199,18 +199,30 @@ const budgetForm = document.getElementById('budgetForm');
 if (budgetForm) {
     budgetForm.addEventListener('submit', function (e) {
         e.preventDefault();
-        // Move to next input or submit form
-        const form = e.target.closest('form');
-        const inputs = Array.from(form.querySelectorAll('input'));
-        const currentIndex = inputs.indexOf(e.target);
         
-        if (currentIndex < inputs.length - 1) {
-            inputs[currentIndex + 1].focus();
-        } else {
-            form.querySelector('button[type="submit"]').click();
-        }
-    }
-});
+        const previousBalance = parseFloat(document.getElementById('previous_balance').value) || 0;
+        const income = parseFloat(document.getElementById('income').value) || 0;
+        const generalExpenses = parseFloat(document.getElementById('general_expenses').value) || 0;
+        const miscellaneousExpenses = parseFloat(document.getElementById('miscellaneous_expenses').value) || 0;
+        const button = e.target.querySelector('button[type="submit"]');
+        
+        // Validate form
+        const formData = {
+            previous_balance: previousBalance,
+            income: income,
+            general_expenses: generalExpenses,
+            miscellaneous_expenses: miscellaneousExpenses
+        };
+        
+        const rules = {
+            previous_balance: { required: true, label: 'Previous Balance', min: 0 },
+            income: { required: true, label: 'Income', min: 0 },
+            general_expenses: { required: true, label: 'General Expenses', min: 0 },
+            miscellaneous_expenses: { required: true, label: 'Miscellaneous Expenses', min: 0 }
+        };
+        
+        if (!validateForm(formData, rules)) {
+            return;
         }
         
         // Calculate and display results immediately
@@ -426,28 +438,16 @@ document.addEventListener('input', function() {
 // Prevent form submission on Enter key in number inputs (to avoid accidental submissions)
 document.addEventListener('keydown', function(e) {
     if (e.key === 'Enter' && e.target.type === 'number') {
-    e.preventDefault();
-    const previousBalance = parseFloat(document.getElementById('previous_balance').value);
-    const income = parseFloat(document.getElementById('income').value);
-    const generalExpenses = parseFloat(document.getElementById('general_expenses').value);
-    const miscellaneousExpenses = parseFloat(document.getElementById('miscellaneous_expenses').value);
-
-    const savings = income - (generalExpenses + miscellaneousExpenses);
-    const balance = previousBalance + savings;
-
-    document.getElementById('savings').textContent = savings.toFixed(2);
-    document.getElementById('balance').textContent = balance.toFixed(2);
-
-    fetch('save_transaction.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            previous_balance: previousBalance,
-            income: income,
-            general_expenses: generalExpenses,
-            miscellaneous_expenses: miscellaneousExpenses
-        })
-    })
-    .then(response => response.text())
-    .then(data => alert(data));
+        e.preventDefault();
+        // Move to next input or submit form
+        const form = e.target.closest('form');
+        const inputs = Array.from(form.querySelectorAll('input'));
+        const currentIndex = inputs.indexOf(e.target);
+        
+        if (currentIndex < inputs.length - 1) {
+            inputs[currentIndex + 1].focus();
+        } else {
+            form.querySelector('button[type="submit"]').click();
+        }
+    }
 });

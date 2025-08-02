@@ -5,28 +5,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Budget Tracker</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
-        <h1>Budget Tracker</h1>
+        <div class="header">
+            <h1>💰 MoneyMap</h1>
+            <p class="subtitle">Take control of your finances</p>
+        </div>
+        
         <div id="login-form">
             <h2>Login</h2>
             <form id="loginForm">
-                <input type="text" id="username" placeholder="Username" required>
-                <input type="password" id="password" placeholder="Password" required>
-                <button type="submit">Login</button>
+                <div class="input-group">
+                    <input type="text" id="username" placeholder="Username" required minlength="3" maxlength="50">
+                    <span class="input-error" id="username-error"></span>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="password" placeholder="Password" required minlength="6">
+                    <span class="input-error" id="password-error"></span>
+                </div>
+                <button type="submit" class="btn-primary">
+                    <span class="btn-text">Login</span>
+                    <span class="btn-loading" style="display: none;">Logging in...</span>
+                </button>
             </form>
             <p>Don't have an account? <a href="#" id="showSignup">Sign Up</a></p>
         </div>
+        
         <div id="signup-form" style="display: none;">
             <h2>Sign Up</h2>
             <form id="signupForm">
-                <input type="text" id="newUsername" placeholder="Username" required>
-                <input type="password" id="newPassword" placeholder="Password" required>
-                <button type="submit">Sign Up</button>
+                <div class="input-group">
+                    <input type="text" id="newUsername" placeholder="Username (3-50 characters)" required minlength="3" maxlength="50">
+                    <span class="input-error" id="new-username-error"></span>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="newPassword" placeholder="Password (min 6 characters)" required minlength="6">
+                    <span class="input-error" id="new-password-error"></span>
+                </div>
+                <button type="submit" class="btn-primary">
+                    <span class="btn-text">Sign Up</span>
+                    <span class="btn-loading" style="display: none;">Creating account...</span>
+                </button>
             </form>
             <p>Already have an account? <a href="#" id="showLogin">Login</a></p>
         </div>
+        
+        <div id="message" class="message" style="display: none;"></div>
     </div>
     <script src="script.js"></script>
 </body>

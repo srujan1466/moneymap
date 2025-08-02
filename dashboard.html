@@ -5,30 +5,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
-        <h1>Budget Tracker</h1>
-        <form id="budgetForm">
-            <label for="previous_balance">Previous Balance:</label>
-            <input type="number" id="previous_balance" required>
-
-            <label for="income">Monthly Income:</label>
-            <input type="number" id="income" required>
-
-            <label for="general_expenses">General Expenses:</label>
-            <input type="number" id="general_expenses" required>
-
-            <label for="miscellaneous_expenses">Miscellaneous Expenses:</label>
-            <input type="number" id="miscellaneous_expenses" required>
-
-            <button type="submit">Calculate</button>
-        </form>
-        <div id="result">
-            <h2>Results</h2>
-            <p>Savings: <span id="savings"></span></p>
-            <p>Balance: <span id="balance"></span></p>
+        <div class="header">
+            <h1>💰 MoneyMap Dashboard</h1>
+            <button id="logoutBtn" class="btn-secondary">Logout</button>
         </div>
+        
+        <form id="budgetForm">
+            <h2>Add New Transaction</h2>
+            
+            <div class="input-group">
+                <label for="previous_balance">Previous Balance ($)</label>
+                <input type="number" id="previous_balance" step="0.01" min="0" max="999999" required>
+                <span class="input-error" id="previous-balance-error"></span>
+            </div>
+
+            <div class="input-group">
+                <label for="income">Monthly Income ($)</label>
+                <input type="number" id="income" step="0.01" min="0" max="999999" required>
+                <span class="input-error" id="income-error"></span>
+            </div>
+
+            <div class="input-group">
+                <label for="general_expenses">General Expenses ($)</label>
+                <input type="number" id="general_expenses" step="0.01" min="0" max="999999" required>
+                <span class="input-error" id="general-expenses-error"></span>
+            </div>
+
+            <div class="input-group">
+                <label for="miscellaneous_expenses">Miscellaneous Expenses ($)</label>
+                <input type="number" id="miscellaneous_expenses" step="0.01" min="0" max="999999" required>
+                <span class="input-error" id="miscellaneous-expenses-error"></span>
+            </div>
+
+            <button type="submit" class="btn-primary">
+                <span class="btn-text">Calculate & Save</span>
+                <span class="btn-loading" style="display: none;">Calculating...</span>
+            </button>
+        </form>
+        
+        <div id="result">
+            <h2>Current Results</h2>
+            <div class="result-grid">
+                <div class="result-card">
+                    <h3>Monthly Savings</h3>
+                    <p class="result-value" id="savings">$0.00</p>
+                </div>
+                <div class="result-card">
+                    <h3>New Balance</h3>
+                    <p class="result-value" id="balance">$0.00</p>
+                </div>
+            </div>
+        </div>
+        
+        <div id="transaction-history">
+            <h2>Transaction History</h2>
+            <div id="transactions-list">
+                <p class="loading">Loading transactions...</p>
+            </div>
+            <button id="loadMoreBtn" class="btn-secondary" style="display: none;">Load More</button>
+        </div>
+        
+        <div id="message" class="message" style="display: none;"></div>
     </div>
     <script src="script.js"></script>
 </body>

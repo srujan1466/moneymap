@@ -4,7 +4,7 @@
   "description": "A personal budget tracking application",
   "main": "index.html",
   "scripts": {
-    "start": "php -S localhost:8000",
+    "start": "npx serve . -p 8000",
     "test": "echo \"No tests specified\" && exit 0"
   },
   "keywords": ["budget", "tracker", "finance", "money"],

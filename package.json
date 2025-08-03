@@ -1,0 +1,15 @@
+{
+  "name": "moneymap-budget-tracker",
+  "version": "1.0.0",
+  "description": "A personal budget tracking application",
+  "main": "index.html",
+  "scripts": {
+    "start": "php -S localhost:8000",
+    "test": "echo \"No tests specified\" && exit 0"
+  },
+  "keywords": ["budget", "tracker", "finance", "money"],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {},
+  "dependencies": {}
+}
